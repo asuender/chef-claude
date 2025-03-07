@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { generateRecipe } from '@/app/lib/actions';
 import UserForm from '@/app/ui/UserForm';
-import Markdown from 'react-markdown';
+import Recipe from '@/app/ui/Recipe';
+import RecipeSkeleton from '@/app/ui/RecipeSkeleton';
 
 export default function Page() {
   const [ingredients, setIngredients] = useState<string[]>([
@@ -13,13 +14,18 @@ export default function Page() {
     'tomato paste',
   ]);
   const [recipe, setRecipe] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function addIngredient(formData: FormData) {
     setIngredients([...ingredients, formData.get('ingredient') as string]);
   }
 
   async function getRecipe() {
-    await generateRecipe(ingredients).then((recipe) => setRecipe(recipe));
+    setIsLoading(true);
+    await generateRecipe(ingredients).then((recipe) => {
+      setRecipe(recipe);
+      setIsLoading(false);
+    });
   }
 
   return (
@@ -55,7 +61,7 @@ export default function Page() {
         </button>
       </div>
 
-      {recipe && <Markdown>{recipe}</Markdown>}
+      {isLoading ? <RecipeSkeleton /> : recipe && <Recipe recipe={recipe} />}
     </main>
   );
 }
