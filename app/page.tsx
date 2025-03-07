@@ -5,9 +5,10 @@ import UserForm from '@/app/ui/UserForm';
 
 export default function Page() {
   const [ingredients, setIngredients] = useState<string[]>([
-    'salt',
-    'pepper',
-    'oregano',
+    'all the main spices',
+    'pasta',
+    'ground beef',
+    'tomato paste',
   ]);
 
   function addIngredient(formData: FormData) {
