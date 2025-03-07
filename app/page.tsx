@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { generateRecipe } from '@/app/lib/actions';
 import UserForm from '@/app/ui/UserForm';
+import Markdown from 'react-markdown';
 
 export default function Page() {
   const [ingredients, setIngredients] = useState<string[]>([
@@ -10,9 +12,14 @@ export default function Page() {
     'ground beef',
     'tomato paste',
   ]);
+  const [recipe, setRecipe] = useState<string>('');
 
   function addIngredient(formData: FormData) {
     setIngredients([...ingredients, formData.get('ingredient') as string]);
+  }
+
+  async function getRecipe() {
+    await generateRecipe(ingredients).then((recipe) => setRecipe(recipe));
   }
 
   return (
@@ -42,10 +49,13 @@ export default function Page() {
         <button
           className="bg-amber-600 rounded-md text-white font-semibold py-1.5 px-3 cursor-pointer disabled:bg-amber-900 disabled:cursor-default"
           disabled={ingredients.length <= 3}
+          onClick={getRecipe}
         >
           Get a recipe
         </button>
       </div>
+
+      {recipe && <Markdown>{recipe}</Markdown>}
     </main>
   );
 }

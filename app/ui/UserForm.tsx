@@ -1,15 +1,14 @@
 'use client';
 
-import { use } from 'react';
 import { PlusIcon } from '@heroicons/react/24/solid';
 
 type Props = {
   addIngredient: (formData: FormData) => void;
 };
 
-export default function UserForm(props: Props) {
+export default function UserForm({ addIngredient }: Props) {  
   return (
-    <form action={props.addIngredient} className="flex gap-4 justify-center w-full text-sm">
+    <form action={addIngredient} className="flex gap-4 justify-center w-full text-sm">
       <input
         id="ingredient"
         name="ingredient"
@@ -28,4 +27,3 @@ export default function UserForm(props: Props) {
     </form>
   );
 }
-//
