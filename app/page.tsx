@@ -30,6 +30,8 @@ export default function Page() {
 
   return (
     <main className="h-full max-w-[760px] m-auto pt-4">
+      <p className='mb-2'>Welcome to Chef Claude! Add at least four ingredients and press the button below to get a custom recipe from Claude AI!</p>
+
       <UserForm addIngredient={addIngredient} />
 
       {ingredients.length > 0 && (
