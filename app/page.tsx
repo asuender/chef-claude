@@ -7,12 +7,7 @@ import Recipe from '@/app/ui/Recipe';
 import RecipeSkeleton from '@/app/ui/RecipeSkeleton';
 
 export default function Page() {
-  const [ingredients, setIngredients] = useState<string[]>([
-    'all the main spices',
-    'pasta',
-    'ground beef',
-    'tomato paste',
-  ]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [recipe, setRecipe] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -30,12 +25,12 @@ export default function Page() {
 
   return (
     <main className="h-full max-w-[760px] m-auto pt-4">
-      <p className='mb-2'>Welcome to Chef Claude! Add at least four ingredients and press the button below to get a custom recipe from Claude AI!</p>
+      <p className='mb-2'>Welcome to Chef Claude! Add at least 4 ingredients and press the button below to get a custom recipe from Claude AI!</p>
 
       <UserForm addIngredient={addIngredient} />
 
       {ingredients.length > 0 && (
-        <div className="mt-3 mb-8">
+        <div className="mt-3">
           <h2 className="text-2xl font-bold">Ingredients on hand:</h2>
           <ul className="list-disc pl-8">
             {ingredients.map((ingredient, index) => (
@@ -45,13 +40,13 @@ export default function Page() {
         </div>
       )}
 
-      <div className="bg-[#F0EFEB] flex items-center justify-between rounded-md p-3">
+      <div className="bg-[#F0EFEB] flex items-center justify-between rounded-md p-3 mt-8">
         <div>
           <h2 className="text-xl font-semibold">Time to cook!</h2>
           <p className="text-sm text-gray-500 my-2">
             {ingredients.length > 3
               ? "You have enough ingredients to make a delicious meal. Let's get cooking!"
-              : 'You need at least 3 ingredients to get a recipe.'}
+              : 'You need at least 4 ingredients to get a recipe.'}
           </p>
         </div>
         <button
